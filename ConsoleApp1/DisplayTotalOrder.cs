@@ -12,6 +12,7 @@ namespace ConsoleApp1
         {
             List <float> amount = new List<float>();
 
+            
             foreach (KeyValuePair<int, int> kvp in listofOrders)
             {
                 float kvpValue = (float)kvp.Value;

@@ -1,54 +1,68 @@
 ﻿// See https://aka.ms/new-console-template for more information
-using ConsoleApp1;
+//using ConsoleApp1.Handler.Database;
+//using ConsoleApp1.Handler.Items;
+//using ConsoleApp1.Handler.Order;
+//using ConsoleApp1.Handler.UserInput;
+using ConsoleApp1.Handler.Database;
+using ConsoleApp1.Handler.Database.Record;
+using ConsoleApp1.Handler.Database.Table;
+using ConsoleApp1.Models;
 using System.Collections.Generic;
 using System.Numerics;
+
+//DeleteTableHandler.DeleteFoodTable();
+//DeleteTableHandler.DeleteOrderTable();
+//AddTableHandler.CreateFoodTable();
+//AddTableHandler.CreateOrderTable();
+//InsertRecordHandler.InsertFoodRecord("Burger", 12.13m);
+//InsertRecordHandler.InsertFoodRecord("Pizza", 7.99m);
+//InsertRecordHandler.InsertFoodRecord("Half-Chicken", 3.99m);
+//ShowRecordHandler.ShowFoodRecord(true, 0);
+//DeleteRecordHandler.DeleteFoodRecord(3);
+var Food = GetRecordHandler.GetFoodRecord(2);
+if (Food is not null)
+    Console.WriteLine(Food.Name);
+
+
 
 
 
 //SHOW RECORD
-RecordDB.ShowRecord(true, 0); //cs0176
-EditMenu.ChangeRecord();
+//RecordDB.ShowRecord(true, 0); //cs0176
+//Console.WriteLine("Choose a number what you want to do?");
+//Console.WriteLine("1. Place an order 2. Add menu 3. Update menu 4. Delete menu");
+//string? Input = ProcessUserInput.Get();
 
-
-//int orderIndex = 0;
-//int orderTotal = 0;
-//float totalPrice = 0.0f;
-//bool orderAgain = false;
-
-//Dictionary<int, int> listofOrders =
-//    new Dictionary<int, int>();
-
-//for (int i = 0; i < foods.Length; i++)
+//if (ProcessUserInput.CheckFloatValue(Input))
 //{
-//    Console.WriteLine($"{i}: {foods[i]} - ${prices[i]}");
-//}
-
-//GetOrder myorder = new GetOrder();
-//Console.WriteLine("Do you want to order?");
-//orderAgain = Console.ReadLine().ToLower() == "yes"; //if it gives a number then ask again
-
-//while (orderAgain == true)
-//{
-//    var order = myorder.GetKeyValue();
-//    if (order.Value != 0)
+//    switch(ProcessUserInput.ConvertStringToInteger(Input))
 //    {
-//        if (listofOrders.ContainsKey(order.Key)) // add total to the existing key
-//        {
-//            listofOrders.TryGetValue(order.Key, out int existingValue);
-//            existingValue += order.Value;
-//            listofOrders[order.Key] = existingValue;
-//        }
-//        else
-//        {
-//            listofOrders.Add(order.Key, order.Value); //if its a new key
-//        }
+//        case 1:
+//            GetOrder.GetOrder();
+//            break;
+//        case 2:
+//            ProcessMenu.AddMenu();
+//            break;
+//        case 3:
+//            ProcessMenu.UpdateMenu();
+//            break;
+//        case 4:
+//            ProcessMenu.DeleteMenu();
+//            break;
+//        default:
+//            Console.WriteLine("No chosen action.");
+//            break;
 //    }
-//    Console.WriteLine("Do you want to order again?");
-//    orderAgain = Console.ReadLine().ToLower() == "yes";
+//}
+//else
+//{
+//    Console.WriteLine("The input cannot be empty or a text.");
 //}
 
-//DisplayTotalOrder displayOrder = new DisplayTotalOrder();
-//displayOrder.DisplayOrder(listofOrders.ToList(), foods.ToList(), prices.ToList());
 
-
-
+//public record Food
+//{
+//    public string Id { get;  set; }
+//    public  string Menu { get; set; }
+//    public  string Price { get; set; }
+//};

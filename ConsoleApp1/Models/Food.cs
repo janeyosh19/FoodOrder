@@ -6,10 +6,16 @@ using System.Threading.Tasks;
 
 namespace ConsoleApp1.Models
 {
-    public class Food
+    public sealed record Food
     {
-        public int Id { get; set; }
-        public  string Name { get; set; }
+        public int Id { get; }
+        public string Name { get; set; }
         public decimal Price { get; set; }
+
+        public Food(string name, decimal price)
+        {
+            Name = name;
+            Price = price;
+        }
     }
 }

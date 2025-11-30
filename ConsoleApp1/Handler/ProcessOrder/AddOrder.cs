@@ -13,11 +13,11 @@
 //    {
 //        public static void HandleOrder(string orderName, float orderPrice, int quantity)
 //        {
-//                order.Amount = order.Price * order.Quantity;
-//                order.TotalAmount += order.Amount;
+//            order.Amount = order.Price * order.Quantity;
+//            order.TotalAmount += order.Amount;
 
-//                Console.WriteLine($"menu, Price, Quantity, Amount");
-//                Console.WriteLine($"{orderName} {orderPrice} {order.Quantity}, {order.Amount}");
+//            Console.WriteLine($"menu, Price, Quantity, Amount");
+//            Console.WriteLine($"{orderName} {orderPrice} {order.Quantity}, {order.Amount}");
 //        }
 
 //    }

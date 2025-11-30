@@ -12,7 +12,6 @@ namespace ConsoleApp1.Handler.Database
     {
         public static Food? GetFoodRecord(int id)
         {
-
             var sql = "SELECT * FROM Food WHERE id = @id";
 
             using var connection = new SqliteConnection("Data Source=foodOrder.db");
@@ -26,11 +25,9 @@ namespace ConsoleApp1.Handler.Database
             {
                 while (reader.Read())
                 {
-                    Food food = new Food();
-                    food.Id = reader.GetInt32(0);
-                    food.Name = reader.GetString(1);
-                    food.Price = reader.GetDecimal(2);
-                    return food;
+                    Food Food = new Food(reader.GetString(1), reader.GetDecimal(2));
+
+                    return Food;
                 }
                 return null;
             }

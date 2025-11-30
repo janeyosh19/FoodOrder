@@ -6,6 +6,7 @@
 using ConsoleApp1.Handler.Database;
 using ConsoleApp1.Handler.Database.Record;
 using ConsoleApp1.Handler.Database.Table;
+using ConsoleApp1.Handler.ProcessMenu;
 using ConsoleApp1.Models;
 using System.Collections.Generic;
 using System.Numerics;
@@ -17,11 +18,12 @@ using System.Numerics;
 //InsertRecordHandler.InsertFoodRecord("Burger", 12.13m);
 //InsertRecordHandler.InsertFoodRecord("Pizza", 7.99m);
 //InsertRecordHandler.InsertFoodRecord("Half-Chicken", 3.99m);
-//ShowRecordHandler.ShowFoodRecord(true, 0);
+ShowRecordHandler.ShowFoodRecord(true, 0);
 //DeleteRecordHandler.DeleteFoodRecord(3);
-var Food = GetRecordHandler.GetFoodRecord(2);
-if (Food is not null)
-    Console.WriteLine(Food.Name);
+
+
+//AddFoodHandler.AddFood();
+//DeleteFoodHandler.DeleteFood();
 
 
 

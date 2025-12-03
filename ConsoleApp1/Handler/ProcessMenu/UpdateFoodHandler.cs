@@ -1,4 +1,6 @@
-﻿using ConsoleApp1.Models;
+﻿using ConsoleApp1.Handler.Database;
+using ConsoleApp1.Handler.Database.Record;
+using ConsoleApp1.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,45 +14,44 @@ namespace ConsoleApp1.Handler.ProcessMenu
         public static void UpdateFood()
         {
             Console.WriteLine("Choose a Food number to update.");
-            string? food = UserInput.ProcessUserInput.ConvertStringToInteger(UserInput.ProcessUserInput.Get();
-            int foodNumber = UserInput.ProcessUserInput.ConvertStringToInteger(food);
+            int foodNumber = UserInput.ProcessUserInput.ConvertStringToInteger(UserInput.ProcessUserInput.Get());
 
-            if (UserInput.ProcessUserInput.CheckIntegerValue(food))
+            //CHECK IF FOOD EXIST
+            if (CheckRecordExistHandler.CheckRecordExist(foodNumber))
             {
                 Console.WriteLine("Choose a number which you want to update?");
                 Console.WriteLine($"1.Food, 2.Price");
 
-                string? selected = UserInput.ProcessUserInput.Get();
-                int selectedNumber = UserInput.ProcessUserInput.ConvertStringToInteger(selected);
+                int selectedColumn = UserInput.ProcessUserInput.ConvertStringToInteger(UserInput.ProcessUserInput.Get());
 
-                if (UserInput.ProcessUserInput.CheckIntegerValue(selected))
+                if (selectedColumn == 1)
                 {
-                    if (selectedNumber == 1)
-                    {
-                        Console.WriteLine("Rename the food.");
-                        string? food = UserInput.ProcessUserInput.Get();
+                    Console.WriteLine("Rename the food.");
+                    string? foodName = UserInput.ProcessUserInput.Get();
 
-                        UpdateFoodHandler.UpdateFood(foodNumber, selectedNumber, food);
-                    }
-                    else if (selectedNumber == 2)
+                    if (!string.IsNullOrEmpty(foodName))
                     {
-                        Console.WriteLine("Write down the new price.");
-                        string? price = UserInput.ProcessUserInput.Get();
-                        if (UserInput.ProcessUserInput.CheckDecimalValue(price) && !string.IsNullOrEmpty(price))
-                        {
-                            UpdateRecordHandler.UpdateFoodRecord(foodNumber, selectedNumber, price);
-                        }
+                        UpdateRecordHandler.UpdateFoodRecord(foodNumber, selectedColumn, foodName);
+                    }
+                }
+                else if (selectedColumn == 2)
+                {
+                    Console.WriteLine("Write down the new price.");
+                    string? price = UserInput.ProcessUserInput.Get();
+
+                    if (UserInput.ProcessUserInput.CheckDecimalValue(price) && !string.IsNullOrEmpty(price))
+                    {
+                        UpdateRecordHandler.UpdateFoodRecord(foodNumber, selectedColumn, price);
                     }
                 }
                 else
                 {
-                    Console.WriteLine("No number is selected.");
+                    Console.WriteLine("Column does not exist.");
                 }
-
             }
             else
             {
-                Console.WriteLine("It should be a food number.");
+                Console.WriteLine("Food doesnt exist");
             }
         }
     }

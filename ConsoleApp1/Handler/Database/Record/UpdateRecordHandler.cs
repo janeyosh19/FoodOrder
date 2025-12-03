@@ -16,7 +16,7 @@ namespace ConsoleApp1.Handler.Database
 
             if (column == 1)
             {
-                sql = "UPDATE Food SET food = @name WHERE id = @id";
+                sql = "UPDATE Food SET name = @name WHERE id = @id";
             }
             else
             {
@@ -33,13 +33,13 @@ namespace ConsoleApp1.Handler.Database
 
             if (column == 1)
             {
-                command.Parameters.AddWithValue("@name", update);
                 command.Parameters.AddWithValue("@id", id);
+                command.Parameters.AddWithValue("@name", update);
             }
             else
             {
-                command.Parameters.AddWithValue("@price", update);
                 command.Parameters.AddWithValue("@id", id);
+                command.Parameters.AddWithValue("@price", update);
             }
 
             command.ExecuteNonQuery();

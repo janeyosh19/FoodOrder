@@ -13,7 +13,7 @@ namespace ConsoleApp1.Handler.Database
         public static void CreateFoodTable()
         {
             var sql = "CREATE TABLE IF NOT EXISTS Food (" +
-                        "id INTEGER PRIMARY KEY AUTOINCREMENT," +
+                        "code TEXT PRIMARY KEY," +
                         "name TEXT NOT NULL," +
                         "price DECIMAL NOT NULL)";
 

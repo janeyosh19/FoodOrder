@@ -1,4 +1,5 @@
-﻿using Microsoft.Data.Sqlite;
+﻿using ConsoleApp1.Models;
+using Microsoft.Data.Sqlite;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,7 @@ namespace ConsoleApp1.Handler.Database.Record
 {
     internal class InsertRecordHandler
     {
-        public static int InsertFoodRecord(string? name, decimal? price) //CS0161 why static ALEX?
+        public static Food? InsertFoodRecord(string name, decimal price) //CS0161 why static ALEX?
         {
             var sql = "INSERT INTO Food (name, price) " +
                         "VALUES (@name, @price)";
@@ -21,9 +22,9 @@ namespace ConsoleApp1.Handler.Database.Record
             command.Parameters.AddWithValue("@name", name);
             command.Parameters.AddWithValue("@price", price);
 
-            int rowInserted = command.ExecuteNonQuery();
+            command.ExecuteNonQuery();
 
-            return rowInserted;
+            return new Food { Name = name, Price = price};
         }
 
         public static int InsertOrderRecord(string? name, string? code,  decimal? price, int? quantity, decimal? amount) //CS0161 why static ALEX?

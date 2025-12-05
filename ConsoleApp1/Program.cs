@@ -7,36 +7,40 @@ using ConsoleApp1.Handler.ProcessMenu;
 using ConsoleApp1.Models;
 using System.Collections.Generic;
 using System.Numerics;
+using ConsoleApp1.Handler.ProcessOrder;
 
 
-ShowRecordHandler.ShowFoodRecord(true, 0);
+//DeleteTableHandler.DeleteFoodTable();
+//DeleteTableHandler.DeleteOrderTable();
+//DeleteTableHandler.DeleteFoodOrdersTable();
 
-Console.WriteLine("Choose a number what you want to do?");
-Console.WriteLine("1. Place an order 2. Add menu 3. Update menu 4. Delete menu");
-int input = ProcessUserInput.ConvertStringToInteger(ProcessUserInput.Get());
+//CreateTableHandler.CreateFoodOrdersTable();
+//CreateTableHandler.CreateFoodTable();
+//CreateTableHandler.CreateOrdersTable();
 
-if(input is >= 1 and <= 4)
-{
-    switch (input)
-    {
-        case 1:
-            //GetOrder.GetOrder();
-            //break;
-        case 2:
-            InsertFoodHandler.InsertFood();
-            break;
-        case 3:
-            UpdateFoodHandler.UpdateFood();
-            break;
-        case 4:
-            DeleteFoodHandler.DeleteFood();
-            break;
-        default:
-            Console.WriteLine("No chosen action.");
-            break;
-    }
-}
-else
-{
-    Console.WriteLine("No chosen action");
-}
+
+
+//ShowRecordHandler.ShowFoodRecord(true, 0);
+
+//Console.WriteLine("Choose a number what you want to do?");
+//Console.WriteLine("1. Place an order 2. Add menu 3. Update menu 4. Delete menu");
+//int input = ProcessUserInput.ConvertStringToInteger(ProcessUserInput.Get());
+
+//switch (input)
+//{
+//    case 1:
+//        GetOrderHandler.GetOrder();
+//        break;
+//    case 2:
+//        InsertFoodHandler.InsertFood();
+//        break;
+//    case 3:
+//        UpdateFoodHandler.UpdateFood();
+//        break;
+//    case 4:
+//        DeleteFoodHandler.DeleteFood();
+//        break;
+//    default:
+//        Console.WriteLine("No chosen action.");
+//        break;
+//}

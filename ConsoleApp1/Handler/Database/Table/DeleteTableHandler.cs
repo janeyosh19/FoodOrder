@@ -20,5 +20,11 @@ namespace ConsoleApp1.Handler.Database.Table
             SQLTableHandler.HandleTable("DROP TABLE IF EXISTS Orders");
             Console.WriteLine("Order table has been deleted.");
         }
+
+        public static void DeleteFoodOrdersTable()
+        {
+            SQLTableHandler.HandleTable("DROP TABLE IF EXISTS FoodOrders");
+            Console.WriteLine("FoodOrders table has been deleted.");
+        }
     }
 }

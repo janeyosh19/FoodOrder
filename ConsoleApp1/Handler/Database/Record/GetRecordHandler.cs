@@ -10,15 +10,15 @@ namespace ConsoleApp1.Handler.Database
 {
     internal class GetRecordHandler
     {
-        public static Food? GetFoodRecord(int id)
+        public static Food? GetFoodRecord(int food_id)
         {
-            var sql = "SELECT * FROM Food WHERE id = @id";
+            var sql = "SELECT * FROM Food WHERE food_id = @food_id";
 
             using var connection = new SqliteConnection("Data Source=foodOrder.db");
             connection.Open();
             using var command = new SqliteCommand(sql, connection);
 
-            command.Parameters.AddWithValue("@id", id);
+            command.Parameters.AddWithValue("@food_id", food_id);
 
             Food food = new Food();
 
@@ -41,38 +41,75 @@ namespace ConsoleApp1.Handler.Database
             }
         }
 
-    //    public static Order? GetOrderRecord(string code)
-    //    {
+        public static int GetLastOrderId()
+        {
+            var sql = "SELECT order_id FROM Orders ORDER BY order_id DESC LIMIT 1";
+            using var connection = new SqliteConnection("Data Source=foodOrder.db");
+            connection.Open();
+            using var command = new SqliteCommand(sql, connection);
+            var result = command.ExecuteScalar();
+            if (result != null)
+            {
+                return Convert.ToInt32(result);
+            }
+            else
+            {
+                Console.WriteLine("No order found.");
+                return 0;
+            }
+        }
 
-    //        var sql = "SELECT * FROM Food WHERE code = @code";
+        public static int GetOrderId(int? order_no)
+        {
+            var sql = "SELECT order_id FROM Orders WHERE order_no = @order_no";
+            using var connection = new SqliteConnection("Data Source=foodOrder.db");
+            connection.Open();
+            using var command = new SqliteCommand(sql, connection);
+            command.Parameters.AddWithValue("@order_no", order_no);
+            var result = command.ExecuteScalar();
+            if (result != null)
+            {
+                return Convert.ToInt32(result);
+            }
+            else
+            {
+                Console.WriteLine("No order found.");
+                return 0;
+            }
+        }
 
-    //        using var connection = new SqliteConnection("Data Source=foodOrder.db");
-    //        connection.Open();
-    //        using var command = new SqliteCommand(sql, connection);
+        //public static Order? GetOrderRecord()
+        //{
 
-    //        command.Parameters.AddWithValue("@code", code);
+        //    var sql = "SELECT * FROM Orders";
 
-    //        using var reader = command.ExecuteReader();
-    //        if (reader.HasRows)
-    //        {
-    //            while (reader.Read())
-    //            {
-    //                Order order = new Order();
-    //                order.Id = reader.GetInt32(0);
-    //                order.Name = reader.GetString(1);
-    //                order.Code = reader.GetString(2);
-    //                order.Price = reader.GetDecimal(3);
-    //                order.Quantity = reader.GetInt32(4);
-    //                order.Amount = reader.GetDecimal(5);
-    //                return order;
-    //            }
-    //            return null;
-    //        }
-    //        else
-    //        {
-    //            Console.WriteLine("No food found.");
-    //            return null;
-    //        }
-    //    }
+        //    using var connection = new SqliteConnection("Data Source=foodOrder.db");
+        //    connection.Open();
+        //    using var command = new SqliteCommand(sql, connection);
+
+        //    command.Parameters.AddWithValue("@code", code);
+
+        //    using var reader = command.ExecuteReader();
+        //    if (reader.HasRows)
+        //    {
+        //        while (reader.Read())
+        //        {
+        //            Order order = new Order();
+        //            order.Id = reader.GetInt32(0);
+        //            order.Name = reader.GetString(1);
+        //            order.Code = reader.GetString(2);
+        //            order.Price = reader.GetDecimal(3);
+        //            order.Quantity = reader.GetInt32(4);
+        //            order.Amount = reader.GetDecimal(5);
+        //            return order;
+        //        }
+        //        return null;
+        //    }
+        //    else
+        //    {
+        //        Console.WriteLine("No food found.");
+        //        return null;
+        //    }
+        //}
     }
 }

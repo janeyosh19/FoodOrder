@@ -16,11 +16,11 @@ namespace ConsoleApp1.Handler.Database
 
             if (column == 1)
             {
-                sql = "UPDATE Food SET name = @name WHERE id = @id";
+                sql = "UPDATE Food SET name = @name WHERE food_id = @food_id";
             }
             else
             {
-                sql = "UPDATE Food SET price = @price WHERE id = @id";
+                sql = "UPDATE Food SET price = @price WHERE food_id = @food_id";
             }
 
             using var connection = new SqliteConnection("Data Source=foodOrder.db");
@@ -33,12 +33,12 @@ namespace ConsoleApp1.Handler.Database
 
             if (column == 1)
             {
-                command.Parameters.AddWithValue("@id", id);
+                command.Parameters.AddWithValue("@food_id", id);
                 command.Parameters.AddWithValue("@name", update);
             }
             else
             {
-                command.Parameters.AddWithValue("@id", id);
+                command.Parameters.AddWithValue("@food_id", id);
                 command.Parameters.AddWithValue("@price", update);
             }
 
@@ -46,6 +46,40 @@ namespace ConsoleApp1.Handler.Database
 
             Console.WriteLine("To:");
             ShowRecordHandler.ShowFoodRecord(false, id);
+        }
+
+        public static void UpdateOrderRecord(int food_id, int order_id, int quantity, decimal amount)
+        {
+            var sql = "UPDATE Orders SET quantity = @quantity, amount = amount + @amount WHERE order_id = @order_id";
+            using var connection = new SqliteConnection("Data Source=foodOrder.db");
+            connection.Open();
+            using var command = new SqliteCommand(sql, connection);
+            //SHOW RECORDS BEFORE CHANGING
+            Console.WriteLine("From:");
+            ShowRecordHandler.ShowOrderRecord(false, order_id);
+            command.Parameters.AddWithValue("@order_id", order_id);
+            command.Parameters.AddWithValue("@quantity", quantity);
+            command.Parameters.AddWithValue("@amount", amount);
+            command.ExecuteNonQuery();
+            Console.WriteLine("To:");
+            ShowRecordHandler.ShowOrderRecord(false, order_id);
+        }
+
+        public static void UpdateFoodOrderQuantityRecord(int food_id, int order_id, int quantity)
+        {
+            var sql = "UPDATE FoodOrders SET quantity = quantity + @quantity WHERE food_id = @food_id AND order_id = @order_id";
+            using var connection = new SqliteConnection("Data Source=foodOrder.db");
+            connection.Open();
+            using var command = new SqliteCommand(sql, connection);
+            //SHOW RECORDS BEFORE CHANGING
+            Console.WriteLine("From:");
+            ShowRecordHandler.ShowOrderRecord(false, order_id);
+            command.Parameters.AddWithValue("@food_id", food_id);
+            command.Parameters.AddWithValue("@order_id", order_id);
+            command.Parameters.AddWithValue("@quantity", quantity);
+            command.ExecuteNonQuery();
+            Console.WriteLine("To:");
+            ShowRecordHandler.ShowOrderRecord(false, order_id);
         }
     }
 }

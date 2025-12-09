@@ -14,31 +14,56 @@ namespace ConsoleApp1.Handler.ProcessOrder
 {
     internal class AddOrderHandler
     {
-        public static void AddOrder(string orderName, decimal orderPrice, int quantity)
+        public static void AddOrder()
         {
-            //check rcode if exist
+            Food food = new Food();
+            Order order = new Order();
 
-            //Add record order
+            var rand = new Random();
+            bool toOrder = true;
 
-            //addrecord 
-            //rand.Next(1000, 9999);
-            //InsertRecordHandler.InsertOrderRecord(orderName, orderPrice, quantity);
+            order.No = 1;
 
-            ////Sent amount back
+            //check if orderNo exist
+            while (CheckRecordExistHandler.CheckOrderNoExist(order.No))
+            {
+                order.No = rand.Next(1, 9999); 
+            }
 
-            //order.Amount = order.Price * order.Quantity;
-            //order.TotalAmount += order.Amount;
+            while(true)
+            {
+                //Ask order details
+                Console.WriteLine("Choose a menu number to order.");
+                food.Id = UserInput.ProcessUserInput.ConvertStringToInteger(UserInput.ProcessUserInput.Get());
+                Console.WriteLine("How many?");
+                order.Quantity = UserInput.ProcessUserInput.ConvertStringToInteger(UserInput.ProcessUserInput.Get());
 
-            //Console.WriteLine($"menu, Price, Quantity, Amount");
-            //Console.WriteLine($"{orderName} {orderPrice} {order.Quantity}, {order.Amount}");
-        }
+                food.Price = GetRecordHandler.GetFoodRecord(food.Id).Price;
+                
+                //Add order record
+                InsertRecordHandler.InsertOrderRecord(order.No, order.Quantity, food.Price * order.Quantity);
+                order.Id = GetRecordHandler.GetOrderId(order.No);
 
-        public static string CreateCode()
-        {
-            var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-            var random = new Random();
-            var list = Enumerable.Repeat(0, 8).Select(x => chars[random.Next(chars.Length)]);
-            return string.Join("", list);
+                //Check if foodid exist in food order table
+                if (CheckRecordExistHandler.CheckFoodIdExist(food.Id))
+                {
+                   UpdateRecordHandler.UpdateOrderRecord(food.Id, order.Id, order.Quantity, food.Price * order.Quantity);
+                //Update  FoodOrder quantity based on the foo id and  order id 
+                UpdateRecordHandler.UpdateFoodOrderQuantityRecord(food.Id, order.Id, order.Quantity);
+                }
+                //Add food order record
+                else {
+                    InsertRecordHandler.InsertFoodOrderRecord(food.Id, order.Id);
+                }
+
+                Console.WriteLine("Do you want to order again?");
+                Console.WriteLine("1.Yes 2. No");
+                if (UserInput.ProcessUserInput.ConvertStringToInteger(UserInput.ProcessUserInput.Get()) == 1)
+                {
+                    toOrder = true;
+                }
+                else { toOrder = false; }
+            }
         }
     }
 }

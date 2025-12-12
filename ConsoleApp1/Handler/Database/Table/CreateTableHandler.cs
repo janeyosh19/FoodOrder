@@ -22,7 +22,7 @@ namespace ConsoleApp1.Handler.Database
             Console.WriteLine("Food table has been created.");
         }
 
-        public static void CreateOrdersTable()//add food
+        public static void CreateOrdersTable()
         {
             var sql = "CREATE TABLE IF NOT EXISTS Orders (" +
                       "order_id INTEGER PRIMARY KEY AUTOINCREMENT," +

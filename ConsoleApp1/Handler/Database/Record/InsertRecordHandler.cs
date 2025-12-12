@@ -10,7 +10,7 @@ namespace ConsoleApp1.Handler.Database.Record
 {
     internal class InsertRecordHandler
     {
-        public static Food? InsertFoodRecord(string name, decimal price) //CS0161 why static ALEX?
+        public static Food? InsertFoodRecord(string foodName, decimal price) 
         {
             var sql = "INSERT INTO Food (name, price) " +
                         "VALUES (@name, @price)";
@@ -19,15 +19,15 @@ namespace ConsoleApp1.Handler.Database.Record
             connection.Open();
             using var command = new SqliteCommand(sql, connection);
 
-            command.Parameters.AddWithValue("@name", name);
+            command.Parameters.AddWithValue("@name", foodName);
             command.Parameters.AddWithValue("@price", price);
 
             command.ExecuteNonQuery();
 
-            return new Food { Name = name, Price = price};
+            return new Food { Name = foodName, Price = price};
         }
 
-        public static int InsertOrderRecord(int? order_no, int? quantity, decimal? amount) //CS0161 why static ALEX?
+        public static int InsertOrderRecord(int? orderNo, int? quantity, decimal? amount) 
         {
             var sql = "INSERT INTO Orders (order_no, quantity, amount)" +
                         "VALUES (@order_no, @quantity, @amount)";
@@ -36,24 +36,25 @@ namespace ConsoleApp1.Handler.Database.Record
             connection.Open();
             using var command = new SqliteCommand(sql, connection);
 
-            command.Parameters.AddWithValue("@order_no", order_no);
+            command.Parameters.AddWithValue("@order_no", orderNo);
             command.Parameters.AddWithValue("@quantity", quantity);
             command.Parameters.AddWithValue("@amount", amount);
-
             command.ExecuteNonQuery();
 
-            return GetRecordHandler.GetOrderId(order_no);
+            return GetRecordHandler.GetOrderId(orderNo);
         }
 
-        public static void InsertFoodOrderRecord(int food_id, int order_id)
+        public static void InsertFoodOrderRecord(int foodId, int orderId, int quantity)
         {
-            var sql = "INSERT INTO FoodOrders (food_id, order_id)" +
-                        "VALUES (@food_id, @order_id)";
+            var sql = "INSERT INTO FoodOrders (food_id, order_id, quantity)" +
+                        "VALUES (@food_id, @order_id, @quantity)";
             using var connection = new SqliteConnection("Data Source=foodOrder.db");
             connection.Open();
             using var command = new SqliteCommand(sql, connection);
-            command.Parameters.AddWithValue("@food_id", food_id);
-            command.Parameters.AddWithValue("@order_id", order_id);
+            command.Parameters.AddWithValue("@food_id", foodId);
+            command.Parameters.AddWithValue("@order_id", orderId);
+            command.Parameters.AddWithValue("@quantity", quantity);
+
             command.ExecuteNonQuery();
         }
     }

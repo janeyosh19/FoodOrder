@@ -10,22 +10,7 @@ using System.Numerics;
 using ConsoleApp1.Handler.ProcessOrder;
 
 
-//CreateTableHandler.CreateFoodTable();
-//CreateTableHandler.CreateOrdersTable();
-//CreateTableHandler.CreateFoodOrdersTable();
-
-//DeleteTableHandler.DeleteFoodOrdersTable();
-//DeleteTableHandler.DeleteFoodTable();
-//DeleteTableHandler.DeleteOrderTable();
-
-DeleteRecordHandler.DeleteAllFoodOrderRecords();
-DeleteRecordHandler.DeleteAllOrderRecords();
-
-
 ShowRecordHandler.ShowFoodRecord(true, 0);
-ShowRecordHandler.ShowOrderRecord(true, 0);
-ShowRecordHandler.ShowFoodOrdersRecord();
-
 
 Console.WriteLine("Choose a number what you want to do?");
 Console.WriteLine("1. Place an order 2. Add menu 3. Update menu 4. Delete menu");
@@ -33,7 +18,7 @@ int input = ProcessUserInput.ConvertStringToInteger(ProcessUserInput.Get());
 switch (input)
 {
     case 1:
-        AddOrderHandler.AddOrder();
+        ShowRecordHandler.ShowOrderRecord(false, AddOrderHandler.AddOrder());
         break;
     case 2:
         InsertFoodHandler.InsertFood();

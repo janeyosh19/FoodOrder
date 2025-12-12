@@ -17,7 +17,7 @@ namespace ConsoleApp1.Handler.ProcessMenu
             int foodNumber = UserInput.ProcessUserInput.ConvertStringToInteger(UserInput.ProcessUserInput.Get());
 
             //CHECK IF FOOD EXIST
-            if (CheckRecordExistHandler.CheckOrderIdExist(foodNumber))
+            if (CheckRecordExistHandler.CheckFoodIdExist(foodNumber))
             {
                 Console.WriteLine("Choose a number which you want to update?");
                 Console.WriteLine($"1.Food, 2.Price");

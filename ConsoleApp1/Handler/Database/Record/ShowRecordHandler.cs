@@ -11,7 +11,7 @@ namespace ConsoleApp1.Handler.Database.Record
 {
     internal class ShowRecordHandler
     {
-        public static void ShowFoodRecord(bool showAll, int id)
+        public static void ShowFoodRecord(bool showAll, int foodId)
         {
             string sql;
 
@@ -30,7 +30,7 @@ namespace ConsoleApp1.Handler.Database.Record
 
             if (!showAll)
             {
-                command.Parameters.AddWithValue("@food_id", id);
+                command.Parameters.AddWithValue("@food_id", foodId);
             }
 
             using var reader = command.ExecuteReader();
@@ -50,7 +50,7 @@ namespace ConsoleApp1.Handler.Database.Record
             }
         }
 
-        public static void ShowOrderRecord(bool showAll, int id)
+        public static void ShowOrderRecord(bool showAll, int? orderNo)
         {
             string sql;
 
@@ -60,7 +60,7 @@ namespace ConsoleApp1.Handler.Database.Record
             }
             else
             {
-                sql = "SELECT * FROM Orders WHERE order_id = @order_id";
+                sql = "SELECT * FROM Orders WHERE order_no = @order_no";
             }
 
             using var connection = new SqliteConnection("Data Source=foodOrder.db");
@@ -69,7 +69,7 @@ namespace ConsoleApp1.Handler.Database.Record
 
             if (!showAll)
             {
-                command.Parameters.AddWithValue("@order_id", id);
+                command.Parameters.AddWithValue("@order_no", orderNo);
             }
 
             using var reader = command.ExecuteReader();
@@ -104,7 +104,8 @@ namespace ConsoleApp1.Handler.Database.Record
                 {
                     var food_id = reader.GetInt32(0);
                     var order_id = reader.GetInt32(1);
-                    Console.WriteLine($"{food_id}\t{order_id}");
+                    var quantity = reader.GetInt32(2);
+                    Console.WriteLine($"{food_id}\t{order_id}\t{quantity}");
                 }
             }
             else

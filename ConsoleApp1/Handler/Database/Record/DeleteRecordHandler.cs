@@ -10,7 +10,7 @@ namespace ConsoleApp1.Handler.Database
 {
     internal class DeleteRecordHandler
     {
-        public static void DeleteFoodRecord(int id)
+        public static void DeleteFoodRecord(int foodId)
         {
             var sql = "DELETE FROM Food WHERE food_id = @food_id";
 
@@ -20,18 +20,18 @@ namespace ConsoleApp1.Handler.Database
 
             //Get row to be deleted
             Console.WriteLine("To be deleted:");
-            ShowRecordHandler.ShowFoodRecord(false, id);
+            ShowRecordHandler.ShowFoodRecord(false, foodId);
 
             // Execute the DELETE statement
-            command.Parameters.AddWithValue("@food_id", id);
+            command.Parameters.AddWithValue("@food_id", foodId);
             command.ExecuteNonQuery();
 
             Console.WriteLine("The food has been deleted successfully.");
         }
 
-        public static void DeleteOrderRecord(int id)
+        public static void DeleteOrderRecord(int orderNo)
         {
-            var sql = "DELETE FROM Orders WHERE order_id = @order_id";
+            var sql = "DELETE FROM Orders WHERE order_no = @order_no";
 
             using var connection = new SqliteConnection("Data Source=foodOrder.db");
             connection.Open();
@@ -39,10 +39,10 @@ namespace ConsoleApp1.Handler.Database
 
             //Get row to be deleted
             Console.WriteLine("To be deleted:");
-            ShowRecordHandler.ShowOrderRecord(false, id);
+            ShowRecordHandler.ShowOrderRecord(false, orderNo);
 
             // Execute the DELETE statement
-            command.Parameters.AddWithValue("@order_id", id);
+            command.Parameters.AddWithValue("@order_no", orderNo);
             command.ExecuteNonQuery();
 
             Console.WriteLine("The food has been deleted successfully.");
@@ -59,14 +59,14 @@ namespace ConsoleApp1.Handler.Database
             Console.WriteLine("The orders have been deleted successfully.");
         }
 
-        public static void DeleteFoodOrderRecords(int order_id)
+        public static void DeleteFoodOrderRecords(int orderId)
         {
             var sql = "DELETE FROM FoodOrders WHERE order_id = @order_id";
             using var connection = new SqliteConnection("Data Source=foodOrder.db");
             connection.Open();
             using var command = new SqliteCommand(sql, connection);
             // Execute the DELETE statement
-            command.Parameters.AddWithValue("@order_id", order_id);
+            command.Parameters.AddWithValue("@order_id", orderId);
             command.ExecuteNonQuery();
             Console.WriteLine("The food orders have been deleted successfully.");
         }

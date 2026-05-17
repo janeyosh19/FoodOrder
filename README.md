@@ -13,11 +13,11 @@ Place customer orders
 All data is stored in the database.
 
 
-Technology	Purpose
+Technology	Purpose:
 C#	Programming,
 Models (Classes)
 
-Technologies Used
+Technologies Used:
 SQL Server	Database,
 Visual Studio	Development,
 Console Application	Run program in CMD

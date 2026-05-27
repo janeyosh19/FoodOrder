@@ -1,6 +1,6 @@
 C# Console Restaurant System Using SQL Database
 
-This project is a C# Console Application connected to a SQL Server database.
+This project is a C# Console Application connected to a SQLLite database.
 
 The system allows:
 
